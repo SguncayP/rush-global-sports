@@ -1,0 +1,390 @@
+/* ===== Variables ===== */
+:root {
+  /* Verde de marca #3daf87 como color protagonista. Con texto blanco
+     da 2.73:1 y no cumple AA, pero con texto oscuro llega a 5.9:1,
+     así que se usa de fondo con el verde oscuro encima. */
+  --color-primary: #13241e;
+  --color-primary-light: #1e3a30;
+  --color-accent: #3daf87;
+  --color-accent-hover: #2f9b76;
+  --color-accent-dark: #2a7d5f;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f2f7f5;
+  --color-text: #1a1a1a;
+  --color-text-light: #ffffff;
+  --color-error: #c0392b;
+  --color-success: #1e7e34;
+  --font-base: system-ui, Segoe UI, Arial, sans-serif;
+  --spacing: 1rem;
+  --radius: 8px;
+}
+
+/* ===== Reset básico ===== */
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Desplaza el destino de los enlaces internos para que el header
+   sticky no tape el título de la sección a la que se salta */
+html { scroll-padding-top: 5rem; }
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Verde oscuro en vez del color de texto: distingue el enlace
+   del párrafo y mantiene 5:1 de contraste sobre blanco */
+a { color: var(--color-accent-dark); }
+
+/* Foco visible para accesibilidad con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Oculta visualmente pero deja el texto disponible para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-block;
+  /* Verde de marca con texto oscuro encima: 5.9:1, cumple AA.
+     El borde delimita el botón sobre fondo blanco, donde el verde
+     por sí solo no llega al 3:1 que exige WCAG para componentes */
+  background: var(--color-accent);
+  color: var(--color-primary);
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--color-accent-hover);
+}
+
+/* ===== Header / Nav (mobile first) ===== */
+.site-header {
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Sin esto el menú abierto no baja a una segunda línea: se queda
+     comprimido junto al logo porque flex-wrap es `nowrap` por defecto */
+  flex-wrap: wrap;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-light);
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+.logo span { font-weight: 300; }
+.logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.nav-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: var(--color-text-light);
+  border-radius: 2px;
+}
+.hamburger { position: relative; }
+/* ::before y ::after dibujan las dos líneas extra del ícono de menú */
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.hamburger::before { top: -8px; }
+.hamburger::after { top: 8px; }
+
+/* Oculto por defecto en mobile; JS agrega .is-open al pulsar el botón */
+.primary-nav {
+  display: none;
+  width: 100%;
+}
+.primary-nav.is-open { display: block; }
+
+.primary-nav ul {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.primary-nav a {
+  display: block;
+  padding: 0.75rem 0;
+  color: var(--color-text-light);
+  text-decoration: none;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+.primary-nav a:hover,
+.primary-nav a:focus-visible {
+  text-decoration: underline;
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  text-align: center;
+  padding: 3rem 0;
+}
+/* Sobre el hero verde el botón se invierte: si no, quedaría
+   verde sobre verde y no se distinguiría */
+.hero .btn {
+  background: var(--color-primary);
+  color: var(--color-text-light);
+}
+.hero .btn:hover {
+  background: var(--color-primary-light);
+}
+.hero-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+}
+.hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+.hero p { margin-bottom: 1.5rem; }
+
+/* ===== Secciones generales ===== */
+.section {
+  padding: 3rem 0;
+}
+/* Alterna el fondo de las secciones para separarlas visualmente.
+   Se marca con una clase explícita en el HTML en lugar de contar
+   posiciones: así el orden de las secciones puede cambiar sin romper
+   la alternancia */
+.section--alt {
+  background: var(--color-bg-alt);
+}
+.section h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Deportes: filtros + tarjetas ===== */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.filter-btn {
+  background: var(--color-bg);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.filter-btn:hover {
+  background: var(--color-primary-light);
+  color: var(--color-text-light);
+}
+.filter-btn.is-active {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+.card {
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.card.is-hidden { display: none; } /* usado por el filtro en script.js */
+.card .icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Galería ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.gallery-item {
+  margin: 0;
+}
+.gallery-item img {
+  border-radius: var(--radius);
+}
+.gallery-item figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* ===== Formulario de contacto ===== */
+#contactForm {
+  max-width: 500px;
+}
+/* fieldset y legend agrupan los campos en bloques temáticos */
+#contactForm fieldset {
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0 0 1.5rem;
+}
+#contactForm legend {
+  font-weight: bold;
+  padding: 0 0.5rem;
+}
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.35rem;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Checkbox de términos: casilla y texto en línea, no apilados */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.form-check input { width: auto; }
+.form-check label { margin: 0; font-weight: normal; }
+.form-check .error-msg { width: 100%; }
+/* script.js marca aria-invalid="true" cuando un campo no pasa la validación */
+.form-group input[aria-invalid="true"],
+.form-group textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+.error-msg {
+  display: block;
+  color: var(--color-error);
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+.success-msg {
+  color: var(--color-success);
+  font-weight: bold;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+/* Sin esto los enlaces heredan el azul oscuro de `a` y quedan
+   invisibles sobre el fondo del footer, que usa ese mismo color */
+.site-footer a {
+  color: var(--color-text-light);
+}
+.site-footer a:hover {
+  text-decoration: none;
+}
+/* El navegador pone <address> en cursiva por defecto */
+.site-footer address {
+  font-style: normal;
+}
+
+/* ===== Media query: tablet (>= 768px) =====
+   Justificación: 768px es el punto de corte para tabletas según la
+   Tabla 0.17. A partir de ese ancho hay espacio suficiente para mostrar
+   la navegación horizontal y 2 columnas de tarjetas sin saturar la pantalla. */
+@media (min-width: 768px) {
+  .nav-toggle { display: none; }
+  .primary-nav { display: block; width: auto; }
+  .primary-nav ul {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+  }
+  .primary-nav a { border-top: none; padding: 0.25rem 0; }
+
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== Media query: desktop (>= 1024px) =====
+   Justificación: 1024px es el punto de corte para escritorio según la
+   Tabla 0.17. Se aprovecha el ancho mostrando 3 columnas de tarjetas
+   y agrandando el texto principal del hero. */
+@media (min-width: 1024px) {
+  .hero h1 { font-size: 3rem; }
+  .cards-grid { grid-template-columns: repeat(3, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}

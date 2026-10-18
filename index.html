@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rush Global Sports</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#inicio" class="logo">
+        <img src="img/logo.png" alt="" class="logo-img" width="36" height="36">
+        RUSH <span>Global Sports</span>
+      </a>
+
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primary-nav">
+        <span class="sr-only">Abrir menú</span>
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+
+      <nav id="primary-nav" class="primary-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#deportes">Deportes</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="inicio" class="hero">
+      <div class="container">
+        <img src="img/logo.png" alt="Logo de Rush Global Sports" class="hero-logo" width="80" height="80">
+        <h1>RUSH Global Sports</h1>
+        <p>Entrena, compite y crece con la mejor academia deportiva de la ciudad.</p>
+        <a href="#contacto" class="btn">Inscríbete ahora</a>
+      </div>
+    </section>
+
+    <section id="nosotros" class="section section--alt">
+      <div class="container">
+        <h2>Sobre Nosotros</h2>
+        <p>
+          Rush Global Sports es una academia deportiva dedicada a formar <strong>deportistas de alto
+          rendimiento</strong> y a promover un estilo de vida activo en niños, jóvenes y adultos.
+          Contamos con entrenadores certificados, instalaciones adecuadas y <em>programas
+          personalizados</em> según la edad y el nivel de cada participante.
+        </p>
+      </div>
+    </section>
+
+    <section id="deportes" class="section">
+      <div class="container">
+        <h2>Nuestros Deportes</h2>
+
+        <div class="filters" role="group" aria-label="Filtrar deportes">
+          <button type="button" class="filter-btn is-active" data-filter="all">Todos</button>
+          <button type="button" class="filter-btn" data-filter="futbol">Fútbol</button>
+          <button type="button" class="filter-btn" data-filter="crossfit">CrossFit</button>
+          <button type="button" class="filter-btn" data-filter="trail">Trail Running</button>
+        </div>
+
+        <div class="cards-grid" id="sportsGrid">
+          <article class="card" data-category="futbol">
+            <span class="icon" aria-hidden="true">⚽</span>
+            <h3>Fútbol</h3>
+            <p>Entrenamiento técnico y táctico para todas las edades.</p>
+          </article>
+
+          <article class="card" data-category="crossfit">
+            <span class="icon" aria-hidden="true">🏋️</span>
+            <h3>CrossFit</h3>
+            <p>Entrenamiento funcional de alta intensidad para ganar fuerza y resistencia.</p>
+          </article>
+
+          <article class="card" data-category="trail">
+            <span class="icon" aria-hidden="true">🏃</span>
+            <h3>Trail Running</h3>
+            <p>Carreras en montaña y senderos para mejorar resistencia y técnica de carrera.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria" class="section section--alt">
+      <div class="container">
+        <h2>Galería</h2>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="img/futbol.jpg" alt="Futbolista golpeando un balón sobre el césped de un estadio iluminado"
+                 width="700" height="700" loading="lazy">
+            <figcaption>Entrenamiento de fútbol en cancha reglamentaria</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="img/crossfit.jpg" alt="Atleta levantando una barra con discos en un box de CrossFit"
+                 width="700" height="700" loading="lazy">
+            <figcaption>Sesión de levantamiento en el box de CrossFit</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="img/trail.jpg" alt="Atleta ascendiendo por un sendero rocoso de montaña al amanecer"
+                 width="700" height="700" loading="lazy">
+            <figcaption>Ruta de trail running al amanecer</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section">
+      <div class="container">
+        <h2>Contáctanos</h2>
+        <!-- method="post" declara el envío de datos según el flujo petición-respuesta
+             de la Clase 1; script.js intercepta el envío para validar en el cliente. -->
+        <form id="contactForm" action="#" method="post" novalidate>
+
+          <fieldset>
+            <legend>Datos personales</legend>
+
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ej. María Pérez" minlength="2" required>
+              <span class="error-msg" id="nombreError" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+              <span class="error-msg" id="emailError" aria-live="polite"></span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Tu consulta</legend>
+
+            <div class="form-group">
+              <label for="deporte">¿Qué deporte te interesa?</label>
+              <select id="deporte" name="deporte">
+                <option value="futbol">Fútbol</option>
+                <option value="crossfit">CrossFit</option>
+                <option value="trail">Trail Running</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos qué te interesa y tu disponibilidad" minlength="10" required></textarea>
+              <span class="error-msg" id="mensajeError" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" id="terminos" name="terminos" required>
+              <label for="terminos">Acepto los términos y condiciones</label>
+              <span class="error-msg" id="terminosError" aria-live="polite"></span>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn">Enviar mensaje</button>
+          <p class="success-msg" id="formSuccess" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <img src="img/logo.png" alt="" class="logo-img" width="36" height="36" loading="lazy">
+        <span>RUSH Global Sports</span>
+      </div>
+      <p>&copy; 2026 Rush Global Sports. Todos los derechos reservados.</p>
+      <address>
+        <a href="mailto:contacto@rushglobalsports.com">contacto@rushglobalsports.com</a>
+      </address>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
